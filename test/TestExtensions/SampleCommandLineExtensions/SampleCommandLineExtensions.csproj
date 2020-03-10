@@ -4,9 +4,8 @@
   
   <PropertyGroup>
     <TargetFramework>$(NETFXTargetFramework)</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
     <RootNamespace>SampleCommandLineExtensions</RootNamespace>
+    <Description>A sample commandline extensions for testing NuGet.exe command extensibility</Description>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
