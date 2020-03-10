@@ -10,7 +10,7 @@ NuGet.VisualStudio.dll
 NuGet.VisualStudio.Common.dll
 NuGet.VisualStudio.Interop.dll
 NuGet.VisualStudio.Implementation.dll
-NuGet.VisualStudio.OnlineEnvironments.Client.dll
+NuGet.VisualStudio.OnlineEnvironments.Client2.dll
 
 # MS delay signed assemblies
 Microsoft.Build.NuGetSdkResolver.dll

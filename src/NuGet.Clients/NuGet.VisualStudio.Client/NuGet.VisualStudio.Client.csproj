@@ -315,9 +315,9 @@
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
-    <ProjectReference Include="..\NuGet.VisualStudio.OnlineEnvironments.Client\NuGet.VisualStudio.OnlineEnvironments.Client.csproj">
-      <Project>{4D2BC17C-970D-4448-BF1F-247E6DBBEB52}</Project>
-      <Name>NuGet.VisualStudio.OnlineEnvironments.Client</Name>
+    <ProjectReference Include="..\NuGet.VisualStudio.OnlineEnvironments.Client2\NuGet.VisualStudio.OnlineEnvironments.Client2.csproj">
+      <Project>{290DB64D-74BA-45C5-BAC0-6E31A8AFD5CB}</Project>
+      <Name>NuGet.VisualStudio.OnlineEnvironments.Client2</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bPkgdefProjectOutputGroup%3bGetCopyToOutputDirectoryItems%3bBuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>

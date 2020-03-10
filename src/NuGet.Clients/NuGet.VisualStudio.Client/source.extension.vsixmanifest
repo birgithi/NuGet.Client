@@ -34,7 +34,7 @@
         <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="Microsoft.Web.XmlTransform.dll" AssemblyName="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
         <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="Newtonsoft.Json.dll" AssemblyName="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed" />
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="NuGetConsole.Host.PowerShell" Path="|NuGetConsole.Host.PowerShell|" />
-        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="NuGet.VisualStudio.OnlineEnvironments.Client" Path="|NuGet.VisualStudio.OnlineEnvironments.Client;PkgdefProjectOutputGroup|" />
-        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="NuGet.VisualStudio.OnlineEnvironments.Client" Path="|NuGet.VisualStudio.OnlineEnvironments.Client|" />
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="NuGet.VisualStudio.OnlineEnvironments.Client2" Path="|NuGet.VisualStudio.OnlineEnvironments.Client2;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="NuGet.VisualStudio.OnlineEnvironments.Client2" Path="|NuGet.VisualStudio.OnlineEnvironments.Client2|" />
     </Assets>
 </PackageManifest>
