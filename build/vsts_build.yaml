@@ -565,7 +565,7 @@ jobs:
       ArtifactName: 'BAR logs'
       ArtifactType: 'Container'
       PathToPublish: '$(BarDirectory)'
-    condition: " and(succeeded(),eq(variables['PublishArtifactsToDotNetBuildAssetRegistry'], 'true'), eq(variables['BuildRTM'], 'false')) "
+    condition: " and(eq(variables['PublishArtifactsToDotNetBuildAssetRegistry'], 'true'), eq(variables['BuildRTM'], 'false')) "
 
   - task: MicroBuildCleanup@1
     displayName: "Perform Cleanup Tasks"
