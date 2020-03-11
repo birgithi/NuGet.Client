@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
 using NuGet.VisualStudio;
+using IAsyncServiceProvider = Microsoft.VisualStudio.Shell.IAsyncServiceProvider;
 
 namespace NuGetConsole
 {
@@ -16,12 +17,12 @@ namespace NuGetConsole
     public class OutputConsoleProvider : IOutputConsoleProvider
     {
         private readonly IEnumerable<Lazy<IHostProvider, IHostMetadata>> _hostProviders;
+        private readonly Lazy<IConsole> _cachedOutputConsole;
+        private IAsyncServiceProvider _asyncServiceProvider;
+
         private readonly AsyncLazy<IVsOutputWindow> _vsOutputWindow;
         private readonly AsyncLazy<IVsUIShell> _vsUIShell;
-        private readonly Lazy<IConsole> _cachedOutputConsole;
-
         private IVsOutputWindow VsOutputWindow => NuGetUIThreadHelper.JoinableTaskFactory.Run(_vsOutputWindow.GetValueAsync);
-
         private IVsUIShell VsUIShell => NuGetUIThreadHelper.JoinableTaskFactory.Run(_vsUIShell.GetValueAsync);
 
         [ImportingConstructor]
@@ -32,20 +33,11 @@ namespace NuGetConsole
         { }
 
         OutputConsoleProvider(
-            Microsoft.VisualStudio.Shell.IAsyncServiceProvider asyncServiceProvider, // ambigiuous reference
+            IAsyncServiceProvider asyncServiceProvider,
             IEnumerable<Lazy<IHostProvider, IHostMetadata>> hostProviders)
         {
-            if (asyncServiceProvider == null)
-            {
-                throw new ArgumentNullException(nameof(asyncServiceProvider));
-            }
-
-            if (hostProviders == null)
-            {
-                throw new ArgumentNullException(nameof(hostProviders));
-            }
-
-            _hostProviders = hostProviders;
+            _asyncServiceProvider = asyncServiceProvider ?? throw new ArgumentNullException(nameof(asyncServiceProvider));
+            _hostProviders = hostProviders ?? throw new ArgumentNullException(nameof(hostProviders));
 
             _vsOutputWindow = new AsyncLazy<IVsOutputWindow>(
                 async () =>
@@ -62,7 +54,13 @@ namespace NuGetConsole
                 NuGetUIThreadHelper.JoinableTaskFactory);
 
             _cachedOutputConsole = new Lazy<IConsole>(
-                () => new OutputConsole(VsOutputWindow, VsUIShell));
+                () => new ChannelOutputConsole(
+                        _asyncServiceProvider,
+                        GuidList.guidNuGetOutputWindowPaneGuid,
+                        Resources.OutputConsolePaneName,
+                        NuGetUIThreadHelper.JoinableTaskFactory,
+                        VsUIShell,
+                        VsOutputWindow));
         }
 
         public IOutputConsole CreateBuildOutputConsole()
@@ -77,15 +75,9 @@ namespace NuGetConsole
 
         public IConsole CreatePowerShellConsole()
         {
-            return CreateOutputConsole(requirePowerShellHost: true);
-        }
-
-        public IConsole CreateOutputConsole(bool requirePowerShellHost)
-        {
             var console = _cachedOutputConsole.Value;
 
-            // only instantiate the PS host if necessary (e.g. when package contains PS script files)
-            if (requirePowerShellHost && console.Host == null)
+            if (console.Host == null)
             {
                 var hostProvider = GetPowerShellHostProvider();
                 console.Host = hostProvider.CreateHost(@async: false);
