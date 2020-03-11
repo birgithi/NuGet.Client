@@ -5,7 +5,7 @@
 
   <PropertyGroup>
     <TargetFramework>$(NETFXTargetFramework)</TargetFramework>
-    <Description>NuGet Command Line tool for repository signing</Description>
+    <Description>NuGet Command Line Interface for repository signing.</Description>
     <Shipping>true</Shipping>
     <PackProject>false</PackProject>
     <IncludeInVsix>false</IncludeInVsix>

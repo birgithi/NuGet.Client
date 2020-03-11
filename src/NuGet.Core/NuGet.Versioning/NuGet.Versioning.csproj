@@ -5,7 +5,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(TargetFrameworksLibrary)</TargetFrameworks>
     <TargetFramework />
-    <Description>NuGet's implementation of Semantic Versioning</Description>
+    <Description>NuGet's implementation of Semantic Versioning.</Description>
     <PackageTags>semver;semantic versioning</PackageTags>
     <PackProject>true</PackProject>
     <Shipping>true</Shipping>

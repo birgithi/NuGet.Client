@@ -9,7 +9,7 @@
     <Shipping>true</Shipping>
     <PackProject>true</PackProject>
     <SkipShared>true</SkipShared>
-    <Description>NuGet Build tasks for MSBuild and dotnet restore. Contains restore logic using the MSBuild static graph functionality</Description>
+    <Description>NuGet Build tasks for MSBuild and dotnet restore. Contains restore logic using the MSBuild static graph functionality.</Description>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <XPLATProject>true</XPLATProject>
     <EnableDefaultNoneItems>false</EnableDefaultNoneItems>

@@ -17,7 +17,7 @@
     <CreateVsixContainer>false</CreateVsixContainer>
     <FileAlignment>512</FileAlignment>
     <DeployExtension>false</DeployExtension>
-    <Description>NuGet's Visual Studio extension Package</Description>
+    <Description>NuGet's Visual Studio extension Package.</Description>
     <VSSDKTargetPlatformRegRootSuffix>Exp</VSSDKTargetPlatformRegRootSuffix>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
   </PropertyGroup>

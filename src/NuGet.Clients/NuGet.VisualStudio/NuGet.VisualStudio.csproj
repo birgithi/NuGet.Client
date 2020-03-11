@@ -12,7 +12,7 @@
   <PropertyGroup>
     <PackageId>NuGet.VisualStudio</PackageId>
     <AssemblyDescription>APIs for invoking NuGet services in Visual Studio.</AssemblyDescription>
-    <Description>APIs for invoking NuGet services in Visual Studio</Description>
+    <Description>APIs for invoking NuGet services in Visual Studio.</Description>
     <ImportedFromTypeLib>NuGet.VisualStudio</ImportedFromTypeLib>
     <Guid>228F7591-2777-47D7-B81D-FEADFC71CEB5</Guid>
     <ComVisible>false</ComVisible>

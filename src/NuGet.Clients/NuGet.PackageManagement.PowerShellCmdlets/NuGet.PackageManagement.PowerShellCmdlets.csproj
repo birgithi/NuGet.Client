@@ -12,7 +12,7 @@
     <RootNamespace>NuGet.PackageManagement.PowerShellCmdlets</RootNamespace>
     <AssemblyName>NuGet.PackageManagement.PowerShellCmdlets</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <Description>NuGet's PowerShell Cmdlets for the Visual Studio client</Description>
+    <Description>NuGet's PowerShell Cmdlets for the Visual Studio client.</Description>
     <ResolveNuGetPackages>true</ResolveNuGetPackages>
     <TargetFrameworkVersion>$(NETFXTargetFrameworkVersion)</TargetFrameworkVersion>
   </PropertyGroup>

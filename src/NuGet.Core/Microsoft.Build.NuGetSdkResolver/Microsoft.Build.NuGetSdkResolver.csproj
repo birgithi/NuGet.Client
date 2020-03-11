@@ -9,7 +9,7 @@
     <Shipping>true</Shipping>
     <IncludeInVSIX>true</IncludeInVSIX>
     <PackProject>true</PackProject>
-    <Description>MSBuild SDK resolver for NuGet packages</Description>
+    <Description>MSBuild SDK resolver for NuGet packages.</Description>
     <XPLATProject>true</XPLATProject>
   </PropertyGroup>
 

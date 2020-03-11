@@ -6,7 +6,7 @@
     <Shipping>true</Shipping>
     <Pack>true</Pack>
     <IncludeInVsix>true</IncludeInVsix>
-    <Description>NuGet's Visual Studio client Template Wizard interop implementation</Description>
+    <Description>NuGet's Visual Studio client Template Wizard interop implementation.</Description>
     <RootNamespace>NuGet.VisualStudio</RootNamespace>
     <!-- Override common.project assembly metadata -->
     <AssemblyVersion>1.0.0.0</AssemblyVersion>

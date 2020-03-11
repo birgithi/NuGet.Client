@@ -13,7 +13,7 @@
     <RootNamespace>NuGet.SolutionRestoreManager</RootNamespace>
     <AssemblyName>NuGet.SolutionRestoreManager</AssemblyName>
     <TargetFrameworkVersion>$(NETFXTargetFrameworkVersion)</TargetFrameworkVersion>
-    <Description>NuGet's Visual Studio Solution Restore Manager</Description>
+    <Description>NuGet's Visual Studio Solution Restore Manager.</Description>
     <FileAlignment>512</FileAlignment>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <ImportVSSDKTargets>true</ImportVSSDKTargets>

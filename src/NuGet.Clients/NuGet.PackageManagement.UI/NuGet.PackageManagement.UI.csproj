@@ -8,7 +8,7 @@
     <PackProject>true</PackProject>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <AutoUnifyAssemblyReferences>true</AutoUnifyAssemblyReferences>
-    <Description>Package Management UI elements for Visual Studio, Package Manager UI, Migrator, Options dialog</Description>
+    <Description>Package Management UI elements for Visual Studio, Package Manager UI, Migrator, Options dialog.</Description>
     <RestoreNuGetPackages>true</RestoreNuGetPackages>
     <AssemblyOriginatorKeyFile>$(MS_PFX_PATH)</AssemblyOriginatorKeyFile>
     <StrongNameCert>MsSharedLib72</StrongNameCert>
