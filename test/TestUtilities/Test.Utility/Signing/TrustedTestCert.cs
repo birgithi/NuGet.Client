@@ -91,7 +91,24 @@ namespace Test.Utility.Signing
             //For performance reasons, dotnet/runtime only check to see if the store has been modified once a second.
             if (RuntimeEnvironmentHelper.IsLinux)
             {
-                Thread.Sleep(500);
+                var MaxTries = 30;
+
+                for (var i = 0; i < MaxTries; i++)
+                {
+                    using (var chain = new X509Chain())
+                    {
+                        chain.ChainPolicy.RevocationMode = X509RevocationMode.Online;
+
+                        if (chain.Build(TrustedCert))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Thread.Sleep(1000);
+                        }
+                    }
+                }
             }           
         }
 
