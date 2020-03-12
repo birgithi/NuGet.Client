@@ -7,7 +7,7 @@
     <TargetFrameworks Condition=" '$(IsXPlat)' == 'true' ">$(NETCoreTargetFramework)</TargetFrameworks>
     <TestProject>true</TestProject>
     <TestProjectType>functional</TestProjectType>
-    <Description>Functionality for the nuget functionality in dotnet.exe, dotnet nuget scenarios. Testing using the NuGet.CommandLine.xplat assembly.</Description>
+    <Description>Functionality for the nuget functionality in dotnet CLI, dotnet nuget scenarios. Testing using the NuGet.CommandLine.xplat assembly.</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Runtime" />
