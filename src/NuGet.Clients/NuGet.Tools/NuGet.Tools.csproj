@@ -129,7 +129,7 @@
     <PackageReference Include="Newtonsoft.Json" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.ServiceHub.Framework" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" ExcludeAssets="build" />
-   <PackageReference Include="Microsoft.VisualStudio.Shell.Embeddable" ExcludeAssets="build" />
+    <PackageReference Include="Microsoft.VisualStudio.Shell.Embeddable" ExcludeAssets="build" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\nuget_256.png">
