@@ -657,7 +657,7 @@ phases:
   condition: "and(succeeded(),eq(variables['RunTestsOnLinux'], 'true')) "
   queue:
     name: DDNuGet-Linux
-    timeoutInMinutes: 60
+    timeoutInMinutes: 120
     demands: sh
 
   steps:
@@ -725,7 +725,7 @@ phases:
   condition: "and(succeeded(),eq(variables['RunTestsOnMac'], 'true')) "
   queue:
     name: VSEng-MicroBuildMacCustom
-    timeoutInMinutes: 75
+    timeoutInMinutes: 150
     demands: 
     - sh
     - VSTS_OS -equals Mac_Mojave_10.14
