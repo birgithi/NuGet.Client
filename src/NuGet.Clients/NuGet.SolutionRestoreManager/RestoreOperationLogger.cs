@@ -243,7 +243,7 @@ namespace NuGet.SolutionRestoreManager
         public void WriteLine(MSBuildVerbosityLevel verbosity, string format, params object[] args)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            // TODO NK - This should not be on the UI thread, it doesn't need to be.
+
             if (ShouldShowMessageAsOutput(verbosity))
             {
                 NuGetUIThreadHelper.JoinableTaskFactory.Run(() => _outputConsole.WriteLineAsync(format, args));

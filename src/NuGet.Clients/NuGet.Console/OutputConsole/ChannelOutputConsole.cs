@@ -10,8 +10,6 @@ using Microsoft;
 using Microsoft.ServiceHub.Framework;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.RpcContracts.OutputChannel;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell.ServiceBroker;
 using Microsoft.VisualStudio.Threading;
 using IAsyncServiceProvider = Microsoft.VisualStudio.Shell.IAsyncServiceProvider;
@@ -35,12 +33,7 @@ namespace NuGetConsole
         private PipeWriter _channelPipeWriter;
         private bool _disposedValue = false;
 
-        private readonly IVsUIShell _vsUiShell;
-        private readonly IVsOutputWindow _vsOutputWindow;
-        private readonly AsyncLazy<IVsOutputWindowPane> _outputWindowPane;
-        private IVsOutputWindowPane VsOutputWindowPane => _joinableTaskFactory.Run(_outputWindowPane.GetValueAsync);
-
-        public ChannelOutputConsole(IAsyncServiceProvider asyncServiceProvider, Guid channelId, string outputName, JoinableTaskFactory joinableTaskFactory, IVsUIShell ivsUIShell, IVsOutputWindow vsOutputWindow)
+        public ChannelOutputConsole(IAsyncServiceProvider asyncServiceProvider, Guid channelId, string outputName, JoinableTaskFactory joinableTaskFactory)
         {
             if (asyncServiceProvider == null)
             {
@@ -58,42 +51,12 @@ namespace NuGetConsole
                 IServiceBroker sb = container.GetFullAccessServiceBroker();
                 return new ServiceBrokerClient(sb, _joinableTaskFactory);
             }, _joinableTaskFactory);
-
-            _vsOutputWindow = vsOutputWindow ?? throw new ArgumentNullException(nameof(vsOutputWindow));
-            _vsUiShell = ivsUIShell ?? throw new ArgumentNullException(nameof(ivsUIShell));
-            _outputWindowPane = new AsyncLazy<IVsOutputWindowPane>(async () =>
-            {
-                await _joinableTaskFactory.SwitchToMainThreadAsync();
-
-                // create the Package Manager pane within the Output window
-                var hr = _vsOutputWindow.CreatePane(
-                    ref _channelGuid,
-                    Resources.OutputConsolePaneName,
-                    fInitVisible: 1,
-                    fClearWithSolution: 0);
-                ErrorHandler.ThrowOnFailure(hr);
-
-                IVsOutputWindowPane pane;
-                hr = _vsOutputWindow.GetPane(
-                    ref _channelGuid,
-                    out pane);
-                ErrorHandler.ThrowOnFailure(hr);
-
-                return pane;
-
-            }, _joinableTaskFactory);
         }
 
-        public override async Task ActivateAsync()
+        public override Task ActivateAsync()
         {
-            await _joinableTaskFactory.SwitchToMainThreadAsync();
-
-            _vsUiShell.FindToolWindow(grfFTW: 0,
-                ref GuidList.guidVsWindowKindOutput,
-                out var toolWindow);
-            toolWindow?.Show();
-
-            VsOutputWindowPane.Activate();
+            // Nothing to do here in Visual Studio Online Environments mode. We do not create the pane
+            return Task.CompletedTask;
         }
 
         public override Task ClearAsync()
@@ -159,7 +122,7 @@ namespace NuGetConsole
 
         public override void StartConsoleDispatcher()
         {
-            _ = VsOutputWindowPane;
+            // Nothing to do here in Visual Studio Online Environments mode. We do not create the pane
         }
 
         protected virtual void Dispose(bool disposing)

@@ -25,6 +25,8 @@ namespace NuGetConsole
         private IVsOutputWindow VsOutputWindow => NuGetUIThreadHelper.JoinableTaskFactory.Run(_vsOutputWindow.GetValueAsync);
         private IVsUIShell VsUIShell => NuGetUIThreadHelper.JoinableTaskFactory.Run(_vsUIShell.GetValueAsync);
 
+        private bool _isOnlineEnvironmentsMode = true;
+
         [ImportingConstructor]
         OutputConsoleProvider(
             [ImportMany]
@@ -54,13 +56,21 @@ namespace NuGetConsole
                 NuGetUIThreadHelper.JoinableTaskFactory);
 
             _cachedOutputConsole = new Lazy<IConsole>(
-                () => new ChannelOutputConsole(
-                        _asyncServiceProvider,
-                        GuidList.guidNuGetOutputWindowPaneGuid,
-                        Resources.OutputConsolePaneName,
-                        NuGetUIThreadHelper.JoinableTaskFactory,
-                        VsUIShell,
-                        VsOutputWindow));
+                () =>
+                {
+                    if (_isOnlineEnvironmentsMode)
+                    {
+                        return new ChannelOutputConsole(
+                                _asyncServiceProvider,
+                                GuidList.guidNuGetOutputWindowPaneGuid,
+                                Resources.OutputConsolePaneName,
+                                NuGetUIThreadHelper.JoinableTaskFactory);
+                    }
+                    else
+                    {
+                        return new OutputConsole(VsOutputWindow, VsUIShell);
+                    }
+                });
         }
 
         public IOutputConsole CreateBuildOutputConsole()
