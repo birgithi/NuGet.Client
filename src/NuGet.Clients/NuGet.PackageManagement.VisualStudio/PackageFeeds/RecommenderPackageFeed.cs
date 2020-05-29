@@ -12,6 +12,7 @@ using NuGet.Packaging.Core;
 using NuGet.Protocol.Core.Types;
 using NuGet.VisualStudio;
 using Microsoft.VisualStudio.Threading;
+using NuGet.Versioning;
 
 namespace NuGet.PackageManagement.VisualStudio
 {
@@ -24,6 +25,7 @@ namespace NuGet.PackageManagement.VisualStudio
 
         private readonly SourceRepository _sourceRepository;
         private readonly IEnumerable<PackageCollectionItem> _installedPackages;
+        private readonly Dictionary<string, VersionRange> _dependentPackages;
         private readonly IEnumerable<string> _targetFrameworks;
         private readonly IPackageMetadataProvider _metadataProvider;
         private readonly Common.ILogger _logger;
@@ -39,12 +41,14 @@ namespace NuGet.PackageManagement.VisualStudio
         public RecommenderPackageFeed(
             SourceRepository sourceRepository,
             IEnumerable<PackageCollectionItem> installedPackages,
+            Dictionary<string, VersionRange> dependentPackages,
             IEnumerable<string> targetFrameworks,
             IPackageMetadataProvider metadataProvider,
             Common.ILogger logger)
         {
             _sourceRepository = sourceRepository ?? throw new ArgumentNullException(nameof(sourceRepository));
             _installedPackages = installedPackages ?? throw new ArgumentNullException(nameof(installedPackages));
+            _dependentPackages = dependentPackages ?? throw new ArgumentNullException(nameof(dependentPackages));
             _targetFrameworks = targetFrameworks ?? throw new ArgumentNullException(nameof(targetFrameworks));
             _metadataProvider = metadataProvider ?? throw new ArgumentNullException(nameof(metadataProvider));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -104,9 +108,7 @@ namespace NuGet.PackageManagement.VisualStudio
             {
                 // get lists of only the package ids to send to the recommender
                 List<string> topPackages = _installedPackages.Select(item => item.Id).ToList();
-                // set the dependent packages to an empty list for now. We'll need to update this to the actual dependent packages
-                // when we implement PR-style projects.
-                List<string> depPackages = new List<string>();
+                List<string> depPackages = _dependentPackages.Keys.ToList();
                 // call the recommender to get package recommendations
                 recommendIds = await NuGetRecommender.GetRecommendedPackageIdsAsync(_targetFrameworks, topPackages, depPackages, cancellationToken);
             }
