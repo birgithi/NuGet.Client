@@ -778,7 +778,6 @@ namespace NuGet.PackageManagement.UI
             if (IsRecommenderFlightEnabled())
             {
                 packageFeeds = await CreatePackageFeedAsync(loadContext, _topPanel.Filter, _uiLogger, _recommendPackages);
-                _recommenderVersion = ((RecommenderPackageFeed)packageFeeds.recommenderFeed)?.VersionInfo;
             }
             else
             {
@@ -833,6 +832,9 @@ namespace NuGet.PackageManagement.UI
                     var searchResult = await searchResultTask;
                     pSearchCallback.ReportComplete(searchTask, (uint)searchResult.RawItemsCount);
                 }
+
+                // get the version info from the recommender
+                _recommenderVersion = ((RecommenderPackageFeed)packageFeeds.recommenderFeed)?.VersionInfo;
 
                 // When not using Cache, refresh all Counts.
                 if (!useCachedPackageMetadata)
